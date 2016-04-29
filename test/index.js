@@ -59,6 +59,28 @@ describe('Immutable', function () {
 
       expect(i.foo()).to.equal('foo');
     });
+
+    it('merges object properties', function () {
+      var i = Immutable
+        .new({
+          _foo: {}
+        })
+        .foo({a: 1})
+        .foo({b: 2});
+
+      expect(i.foo()).to.eql({a: 1, b: 2});
+    });
+
+    it('merges array properties', function () {
+      var i = Immutable
+        .new({
+          _foo: []
+        })
+        .foo([1])
+        .foo([2]);
+
+      expect(i.foo()).to.eql([1, 2]);
+    });
   });
 
   describe('equals', function () {

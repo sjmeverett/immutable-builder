@@ -18,9 +18,9 @@ module.exports = {
         if (key[0] === '_') {
           properties[key.substring(1)] = function (value) {
             if (arguments.length) {
-              return this.new(function (obj) {
-                obj[key] = value;
-              });
+              var m = {};
+              m[key] = value;
+              return this.new(m);
 
             } else {
               return this[key];
