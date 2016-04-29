@@ -25,6 +25,12 @@ describe('Immutable', function () {
       expect(Immutable.foo).to.not.exist;
     });
 
+    it('accepts a mutator function with this context', function () {
+      var i = Immutable.new(function () { this.foo = 5; });
+      expect(i.foo).to.equal(5);
+      expect(Immutable.foo).to.not.exist;
+    });
+
     it('adds getter/setter method for properties starting with _', function () {
       var i = Immutable.new({
         _foo: 1

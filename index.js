@@ -8,7 +8,7 @@ module.exports = {
 
     } else if (_.isFunction(merge)) {
       var _this = this.new();
-      merge(_this);
+      merge.call(_this, _this);
       return _this;
 
     } else {
