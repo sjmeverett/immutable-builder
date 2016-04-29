@@ -14,18 +14,20 @@ module.exports = {
     } else {
       var properties = {};
 
-      for (var k in merge) {
-        if (k[0] === '_') {
-          properties[k.substring(1)] = function (value) {
+      _.forIn(merge, function _loop(value, key) {
+        if (key[0] === '_') {
+          properties[key.substring(1)] = function (value) {
             if (arguments.length) {
-              return this.new((x) => x[k] = value);
+              return this.new(function (obj) {
+                obj[key] = value;
+              });
 
             } else {
-              return this[k];
+              return this[key];
             }
           };
         }
-      }
+      });
 
       return _.mergeWith({}, properties, this, merge, function (objValue, srcValue) {
         if (_.isArray(objValue)) {

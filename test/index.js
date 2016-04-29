@@ -39,6 +39,15 @@ describe('Immutable', function () {
       expect(j._foo).to.equal(5);
     });
 
+    it('doesn\'t have the var bug', function () {
+      var i = Immutable.new({
+        _foo: 1,
+        _bar: 2
+      }).foo(3);
+
+      expect(i._foo).to.equal(3);
+    });
+
     it('allows getter/setter to be overridden', function () {
       var i = Immutable
         .new({
